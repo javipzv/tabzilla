@@ -12,7 +12,7 @@ from typing import NamedTuple
 from datetime import datetime
 import re
 
-import optuna
+import optuna # type: ignore
 
 optuna.logging.set_verbosity(optuna.logging.ERROR)
 
