@@ -14,6 +14,14 @@ def register_model(func):
     ALL_MODELS[func.__name__] = func
     return func
 
+##############################################################
+# interpretML models
+
+@register_model
+def EBMModel():
+    from models.EBMmodel import EBMModel as model
+
+    return model
 
 ##############################################################
 # sklearn-based models

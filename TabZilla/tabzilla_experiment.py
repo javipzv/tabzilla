@@ -9,6 +9,8 @@ import traceback
 from collections import namedtuple
 from pathlib import Path
 from typing import NamedTuple
+from datetime import datetime
+import re
 
 import optuna
 
@@ -48,6 +50,20 @@ class TabZillaObjective(object):
         self.dataset.subset_random_seed = self.experiment_args.subset_random_seed
         # directory where results will be written
         self.output_path = Path(self.experiment_args.output_dir).resolve()
+        self.output_path.mkdir(parents=True, exist_ok=True)
+
+        # preprocess dataset_name taking only what is inside __ and __
+        dataset_name = re.search(r"__(.*?)__", dataset.name)
+        if dataset_name is not None:
+            dataset_name = dataset_name.group(1)
+        else:
+            dataset_name = dataset.name
+
+        # add model, dataset, and time to the output path 
+        self.output_path = self.output_path.joinpath(
+            f"{self.model_handle.__name__}__{dataset_name}__{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
+        )
+        self.output_path.mkdir(parents=True, exist_ok=True)
 
         # create the scorer, and get the direction of optimization from the scorer object
         sc_tmp = get_scorer(dataset.target_type)
