@@ -19,7 +19,37 @@ def register_model(func):
 
 @register_model
 def EBMModel():
-    from models.EBMmodel import EBMModel as model
+    from models.interpret_extension.EBMmodel import EBMModel as model
+
+    return model
+
+@register_model
+def GaussianNaiveBayesModel():
+    from models.interpret_extension.GaussianNaiveBayesModel import GaussianNaiveBayesModel as model
+
+    return model
+
+@register_model
+def LDAModel():
+    from models.interpret_extension.LDAmodel import LDAModel as model
+
+    return model
+
+@register_model
+def NAMModel():
+    from models.interpret_extension.NAMmodel import NAMModel as model
+
+    return model
+
+@register_model
+def LinearModelInterpret():
+    from models.interpret_extension.LinearModelInterpret import LinearModelInterpret as model
+
+    return model
+
+@register_model
+def TANModel():
+    from models.interpret_extension.TANmodel import TANModel as model
 
     return model
 
@@ -233,3 +263,5 @@ if __name__ == "__main__":
     print("all algorithms:")
     for n in ALL_MODELS.keys():
         print(n)
+
+from pyAgrum.skbn import BNClassifier
