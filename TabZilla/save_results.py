@@ -18,7 +18,8 @@ def save_results(results_dir):
                         results.append(data)
     return results
 
-dir = r"C:\Users\javip\Desktop\UNIVERSIDAD\CDIA\Curso4\OTROS\BecaColaboracion\repo\tabzilla\TabZilla\results_5_9_15"
+# Specify your folder results here
+dir = r""
 
 results = save_results(dir)
 results_df = pd.DataFrame(columns=['dataset_name', 'dataset_num_features', 'dataset_num_instances',
